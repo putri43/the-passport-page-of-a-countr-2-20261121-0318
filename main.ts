@@ -359,12 +359,13 @@ function coatOfArms(cv: Canvas, cx: number, cy: number, s: number) {
   }
   // star above shield
   star(cv, cx, Math.round(cy - h / 2 - 14 * s), Math.round(9 * s), GOLD);
-  // laurel dots
-  for (let k = 0; k < 7; k++) {
-    const t = k / 6;
-    const ang = Math.PI * (0.15 + 0.7 * t);
-    cv.circle(Math.round(cx - (w / 2 + 16 * s) * Math.cos(ang * 0.5) - 8 * s), Math.round(cy + 10 * s + k * 9 * s), Math.round(3 * s), TEAL);
-    cv.circle(Math.round(cx + (w / 2 + 16 * s) * Math.cos(ang * 0.5) + 8 * s), Math.round(cy + 10 * s + k * 9 * s), Math.round(3 * s), TEAL);
+  // laurel dots: two arcs hugging the shield's lower sides, curving inward
+  for (let k = 0; k < 8; k++) {
+    const t = k / 7;
+    const lx = (w / 2 + 14 * s) * (1 - 0.35 * t);
+    const ly = cy - h * 0.10 + t * h * 0.52;
+    cv.circle(Math.round(cx - lx), Math.round(ly), Math.round(3 * s), TEAL);
+    cv.circle(Math.round(cx + lx), Math.round(ly), Math.round(3 * s), TEAL);
   }
 }
 
